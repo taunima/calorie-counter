@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- This the head of the page/app that holds relevant info about how the browser renders the page with the meta tags. The charset="UTF-8" is what tells the browser what the character encoding to use, and viewports makes the page responsive on moblie devices. The defer attribute in the JavaScript line is what tells the browser to wait until the HTML is fully loaded before the running the JavaScript. Without that, the JavaScript would run before the HTML elements exist and document.getElementById would return null because the elements haven't been created yet. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="calorie_counter.css">
+    <script src="calorie_counter.js" defer></script>
+    <title>Calorie Counter</title>
+</head>
+<body>
+    <!-- The body is main area for the content of what you may have for the page. In this case it is the main content for the calorie conuter. The header is the main title for the page and showing the calories that user has for a limit. The sections of the page are the different meal types with the items they ate with the nutrional values that are important to note as well to be counted as well. With the last section being the goals, weights and notes of the user so that the user could update what they are doing and so on. Within each of these are id's that can be called from the JavaScript file so that it can actually be interactive and be useful. The onclick is using the JavaScript as well to click the button and for the showForm it is to show the forms to fill out the nutritional values and the addFood is used from the JavaScript file as well but this is saving the data to the database. The div with the display:none is what hides the forms by default and then only becomes visible when showForm is called from JavaScript. -->
+    <header id="daily-calories">
+        <h1> Daily Calories </h1>
+        <p id="daily">Calories limit: </p>
+    </header>
+    <section id="breakfast">
+        <h2>Breakfast</h2>
+        <button onclick="showForm('breakfast-form')"> Add Food </button>
+        <div id="breakfast-form" style="display:none">
+            <input type="text" id="breakfast-food-name" placeholder="Food Name ">
+            <input type="number" id="breakfast-calories" placeholder="Calories ">
+            <input type="number" id="breakfast-total-carbs" placeholder="Total Carbs ">
+            <input type="number" id="breakfast-total-fats" placeholder="Total Fats ">
+            <input type="number" id="breakfast-total-protein" placeholder="Total Protein ">
+            <input type="number" id="breakfast-serving-size" placeholder="Serving Size ">
+            <input type="number" id="breakfast-serving-size-amounts" placeholder="Amount of Serving Sizes ">
+            <button onclick="addFood('breakfast')">Save</button>
+        </div>
+    </section>
+    <section id="lunch">
+        <h2>Lunch</h2>
+        <button onclick="showForm('lunch-form')"> Add Food </button>
+        <div id="lunch-form" style="display:none">
+            <input type="text" id="lunch-food-name" placeholder="Food Name: ">
+            <input type="number" id="lunch-calories" placeholder="Calories: ">
+            <input type="number" id="lunch-total-carbs" placeholder="Total Carbs: ">
+            <input type="number" id="lunch-total-fats" placeholder="Total Fats: ">
+            <input type="number" id="lunch-total-protein" placeholder="Total Protein: ">
+            <input type="number" id="lunch-serving-size" placeholder="Serving Size: ">
+            <input type="number" id="lunch-serving-size-amounts" placeholder="Amount of Serving Sizes: ">
+            <button onclick="addFood('lunch')">Save</button>
+        </div>
+    </section>
+    <section id="dinner">
+        <h2>Dinner</h2>
+        <button onclick="showForm('dinner-form')"> Add Food </button>
+        <div id="dinner-form" style="display:none">
+            <input type="text" id="dinner-food-name" placeholder="Food Name: ">
+            <input type="number" id="dinner-calories" placeholder="Calories: ">
+            <input type="number" id="dinner-total-carbs" placeholder="Total Carbs: ">
+            <input type="number" id="dinner-total-fats" placeholder="Total Fats: ">
+            <input type="number" id="dinner-total-protein" placeholder="Total Protein: ">
+            <input type="number" id="dinner-serving-size" placeholder="Serving Size: ">
+            <input type="number" id="dinner-serving-size-amounts" placeholder="Amount of Serving Sizes: ">
+            <button onclick="addFood('dinner')">Save</button>
+        </div>
+    </section>
+    <section id="snacks">
+        <h2>Snacks</h2>
+        <button onclick="showForm('snacks-form')"> Add Food </button>
+        <div id="snacks-form" style="display:none">
+            <input type="text" id="snacks-food-name" placeholder="Food Name: ">
+            <input type="number" id="snacks-calories" placeholder="Calories: ">
+            <input type="number" id="snacks-total-carbs" placeholder="Total Carbs: ">
+            <input type="number" id="snacks-total-fats" placeholder="Total Fats: ">
+            <input type="number" id="snacks-total-protein" placeholder="Total Protein: ">
+            <input type="number" id="snacks-serving-size" placeholder="Serving Size: ">
+            <input type="number" id="snacks-serving-size-amounts" placeholder="Amount of Serving Sizes: ">
+            <button onclick="addFood('snacks')">Save</button>
+        </div>
+    </section>
+    <section id="sub-section">
+        <h3>Weight/Goal/Notes</h3>
+            <p id="current-weight">Current Weight</p>
+            <p id="goal-weight">Goal Weight</p>
+            <p id="goal-type">Goal Type</p>
+            <p id="notes">Notes</p>
+    </section>
+</body>
+</html>
