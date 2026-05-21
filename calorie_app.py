@@ -162,7 +162,7 @@ def get_daily_log():
     connection = sqlite3.connect(os.path.join(BASE_DIR, 'calorie_db', 'calorie_counter.db'))
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
-    cursor.execute("""SELECT food_values.food_name, food_values.calories, daily_calories.meal_type
+    cursor.execute("""SELECT food_values.food_name, food_values.calories, food_values.total_carbs, food_values.total_fat, food_values.total_protein, daily_calories.meal_type
                    FROM daily_calories
                    JOIN food_values ON daily_calories.food_values_id = food_values.id
                    WHERE daily_calories.date = ?""", (date,))

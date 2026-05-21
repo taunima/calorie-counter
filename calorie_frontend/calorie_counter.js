@@ -1,4 +1,5 @@
 // These are variables that are used for the this file so that it can be called throughout the file as well. It grabs the id's from the HTML file so it can do this within the JavaScript file as well.
+const daily = document.getElementById('daily')
 const breakfast = document.getElementById('breakfast')
 const lunch = document.getElementById('lunch')
 const dinner = document.getElementById('dinner')
@@ -23,9 +24,15 @@ function getFoods() {
             dinner.innerHTML = '<h2>Dinner</h2><button onclick="showForm(\'dinner-form\')">Add Food</button>'
             snacks.innerHTML = '<h2>Snacks</h2><button onclick="showForm(\'snacks-form\')">Add Food</button>'
             let totalConsumed = 0
+            let totalCarbs = 0
+            let totalFats = 0
+            let totalProtein = 0
             console.log(data)
                 data.forEach(food => {
                     totalConsumed += food.calories
+                    totalCarbs += food.total_carbs
+                    totalFats += food.total_fat
+                    totalProtein += food.total_protein
                     if (food.meal_type === 'breakfast') {
                         breakfast.innerHTML += `<p>${food.food_name} - ${food.calories} calories</p>`
                     } else if (food.meal_type === 'lunch') {
@@ -39,6 +46,9 @@ function getFoods() {
                 // This is to get that remaining variable so that it can give the remaining calories of the calories that are consumed on that day. 
                 const remaining = goalCalories - totalConsumed
                 document.getElementById('daily').innerHTML = `Calories Remain: ${remaining}`
+                document.getElementById('total-carbs').innerHTML = `Amount of Carbs: ${totalCarbs} g`
+                document.getElementById('total-fats').innerHTML = `Amount of Fats: ${totalFats} g`
+                document.getElementById('total-protein').innerHTML = `Amount of Protein ${totalProtein} g`
             })
 }
 
