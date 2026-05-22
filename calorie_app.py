@@ -154,6 +154,17 @@ def get_calories():
 
     return jsonify(daily_calories)
 
+# This is the route that does the acutal deletion of the specific entry from the daily_calories table using the ID passed in the URL.
+@app.route('/delete_calories/<int:id>', methods=['DELETE'])
+def delete_calories(id):
+    connection = sqlite3.connect(os.path.join(BASE_DIR, 'calorie_db', 'calorie_counter.db'))
+    cursor = connection.cursor()
+    cursor.execute("""DELETE FROM daily_calories WHERE id =?""", (id,))
+    connection.commit()
+    connection.close()
+
+    return jsonify({"message": "Entry deleted successfully"})
+
 # This is different even though it is a GET route.
 @app.route('/get_daily_log', methods=['GET'])
 def get_daily_log():
@@ -162,7 +173,7 @@ def get_daily_log():
     connection = sqlite3.connect(os.path.join(BASE_DIR, 'calorie_db', 'calorie_counter.db'))
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
-    cursor.execute("""SELECT food_values.food_name, food_values.calories, food_values.total_carbs, food_values.total_fat, food_values.total_protein, daily_calories.meal_type
+    cursor.execute("""SELECT daily_calories.id, food_values.food_name, food_values.calories, food_values.total_carbs, food_values.total_fat, food_values.total_protein, daily_calories.meal_type
                    FROM daily_calories
                    JOIN food_values ON daily_calories.food_values_id = food_values.id
                    WHERE daily_calories.date = ?""", (date,))
