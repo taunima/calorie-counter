@@ -168,6 +168,25 @@ function getGoals() {
 }
 getGoals()
 
+function updateGoals(){
+    const goalType = document.getElementById(`new-goal-type`).value
+    const dailyCalories = document.getElementById(`new-daily-calories`).value
+
+    fetch('http://127.0.0.1:5000/update_goals', {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+        goal_type: goalType,
+        daily_calories: dailyCalories
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        getGoals()
+    })
+}
+
 // This function is grabbing the weight data and putting them in the appropriate spots as well. 
 function getWeight() {
     fetch('http://127.0.0.1:5000/get_weight')
@@ -176,10 +195,31 @@ function getWeight() {
         const weight = data[0]
         document.getElementById('current-weight').innerHTML = `Current Weight: ${weight.current_weight}`
         document.getElementById('goal-weight').innerHTML = `Goal Weight: ${weight.goal_weight}`
-        document.getElementById('notes').innerHTML = 
-        `Notes: ${weight.notes}`})
+        document.getElementById('notes').innerHTML = `Notes: ${weight.notes}`
+    })
 }
 getWeight()
+
+function updateWeight() {
+    const currentWeight = document.getElementById('new-current-weight').value
+    const goalWeight = document.getElementById('new-goal-weight').value
+    const notes = document.getElementById('new-notes').value
+
+    fetch('http://127.0.0.1:5000/update_weight', {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+        current_weight: currentWeight,
+        goal_weight: goalWeight,
+        notes: notes
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        getWeight()
+    })
+}
 
 // This is to connect the showForm call to this function so that it can show the display. When the button 'Add Food' is pressed it will change the display from no display to then showing the forms so that the user can input the data it wants to input. After the all of the forms are filled in and the user is ready to press the save button the forms are returned back to no display because getFoods resets the innerHTML of each section which removes the form entirely.
 function showForm(formId) {

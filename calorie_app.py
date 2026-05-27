@@ -119,6 +119,37 @@ def get_weight():
 
     return jsonify(weight)
 
+# This is the route to update the weights of the user, both the current and goal weight forms.
+@app.route('/update_weight', methods=['PUT'])
+def update_weight():
+    data = request.get_json()
+    current_weight = data.get('current_weight')
+    goal_weight = data.get('goal_weight')
+    notes = data.get('notes')
+
+    connection = sqlite3.connect(os.path.join(BASE_DIR, 'calorie_db', 'calorie_counter.db'))
+    cursor = connection.cursor()
+    cursor.execute("UPDATE weight SET current_weight = ?, goal_weight = ?, notes = ? WHERE user_id = ?", (current_weight, goal_weight, notes, 1))
+    connection.commit()
+    connection.close()
+
+    return jsonify({"message": "Weight has been updated!"})
+
+# This is the route to update the goals of the user and the notes.
+@app.route('/update_goals', methods=['PUT'])
+def update_goals():
+    data = request.get_json()
+    goal_type = data.get('goal_type')
+    daily_calories = data.get('daily_calories')
+
+    connection = sqlite3.connect(os.path.join(BASE_DIR, 'calorie_db', 'calorie_counter.db'))
+    cursor = connection.cursor()
+    cursor.execute("UPDATE goals SET goal_type = ?, daily_calories = ? WHERE user_id = ?", (goal_type, daily_calories, 1))
+    connection.commit()
+    connection.close()
+
+    return jsonify({"message": "Goal has been updated."})
+
 # Same thing as before, but for calories.
 @app.route('/add_calories', methods=['POST'])
 def add_calories():

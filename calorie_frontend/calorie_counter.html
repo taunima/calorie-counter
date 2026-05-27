@@ -73,12 +73,26 @@
             <button onclick="addFood('snacks')">Save</button>
         </div>
     </section>
+    <!--This section is taking the users weight, goals, and notes. It also can update all of these features as well so that it can keep up to date on the users goals and so on. It does this by allowing the option of editing the all of these features and also allows to keep these changes in place.-->
     <section id="sub-section">
         <h3>Weight/Goal/Notes</h3>
             <p id="current-weight">Current Weight</p>
             <p id="goal-weight">Goal Weight</p>
             <p id="goal-type">Goal Type</p>
             <p id="notes">Notes</p>
+            <button onclick="showForm('weight-form')">Edit Weight</button>
+            <div id="weight-form" style="display:none">
+                <input type="number" id="new-current-weight" placeholder="Current Weight">
+                <input type="number" id="new-goal-weight" placeholder="Goal Weight">
+                <input type="text" id="new-notes" placeholder="Notes">
+                <button onclick="updateWeight()">Save</button>
+            </div>
+            <button onclick="showForm('goals-form')">Edit Goals</button>
+            <div id="goals-form" style="display:none">
+                <input type="text" id="new-goal-type" placeholder="Goal Type">
+                <input type="number" id="new-daily-calories" placeholder="Daily Calories">
+                <button onclick="updateGoals()">Save</button>
+            </div>
     </section>
 </body>
 </html>
