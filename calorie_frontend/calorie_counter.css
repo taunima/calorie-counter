@@ -38,3 +38,19 @@ button {
     border: none;
 }
 
+/* This handles the background of the progress bar so that it can be shown as a standard for the actual progress bar. */
+#progress-container {
+    background-color: #FAE3C6;
+    border-radius: 8px;
+    height: 20px;
+    width: 100%;
+}
+
+/* This is the actual progress bar so that it can be shown of what is being filled as the amount of calories is logged. */
+#progress-bar {
+    background-color: #6290C3;
+    border-radius: 8px;
+    height: 20px;
+    width: 0%;
+    transition: width 0.3s ease;
+}

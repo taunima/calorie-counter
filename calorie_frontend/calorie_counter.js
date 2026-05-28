@@ -95,6 +95,9 @@ function getFoods() {
                 // This is to get that remaining variable so that it can give the remaining calories of the calories that are consumed on that day. 
                 const remaining = goalCalories - totalConsumed
                 document.getElementById('daily').innerHTML = `Calories Remain: ${remaining}`
+                // This is the element that is being called by the function so that it can be used as a percentage bar that is being filled. It is shown at the top of the site and adjusts to the amount of calories that is being consumed.
+                const percentage = (totalConsumed / goalCalories) * 100
+                document.getElementById('progress-bar').style.width = `${percentage}%`
                 document.getElementById('total-carbs').innerHTML = `Amount of Carbs: ${totalCarbs} g`
                 document.getElementById('total-fats').innerHTML = `Amount of Fats: ${totalFats} g`
                 document.getElementById('total-protein').innerHTML = `Amount of Protein ${totalProtein} g`
@@ -129,7 +132,6 @@ function addFood(meal) {
     })
     .then(response => response.json())
     .then(data => {
-        
         // This fetch call is going to grab data from the add_calories as it is posting calories of the data. It is the second part of the sequence that is calling the data from the calories data. This is needed so that it can grab the data from this, so it can connect to the first sequence and show in the HTML as the correct forms and order. 
         const foodId = data.food_id
         return fetch('http://127.0.0.1:5000/add_calories', {
@@ -168,6 +170,7 @@ function getGoals() {
 }
 getGoals()
 
+// This function is that it can update the goals of the user and the amount of calories that the user should be consuming. 
 function updateGoals(){
     const goalType = document.getElementById(`new-goal-type`).value
     const dailyCalories = document.getElementById(`new-daily-calories`).value
@@ -200,6 +203,7 @@ function getWeight() {
 }
 getWeight()
 
+// This is the function that will also allow the user to update and edit the users weights and notes as the users changes.
 function updateWeight() {
     const currentWeight = document.getElementById('new-current-weight').value
     const goalWeight = document.getElementById('new-goal-weight').value
