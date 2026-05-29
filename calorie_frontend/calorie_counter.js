@@ -97,7 +97,13 @@ function getFoods() {
                 document.getElementById('daily').innerHTML = `Calories Remain: ${remaining}`
                 // This is the element that is being called by the function so that it can be used as a percentage bar that is being filled. It is shown at the top of the site and adjusts to the amount of calories that is being consumed.
                 const percentage = (totalConsumed / goalCalories) * 100
-                document.getElementById('progress-bar').style.width = `${percentage}%`
+                if (percentage >  100) {
+                    document.getElementById('progress-bar').style.backgroundColor = '#E5625E'
+                    document.getElementById('progress-bar').style.width = '100%'
+                } else {
+                    document.getElementById('progress-bar').style.backgroundColor = '#6290C3'
+                    document.getElementById('progress-bar').style.width = `${percentage}%`
+                }
                 document.getElementById('total-carbs').innerHTML = `Amount of Carbs: ${totalCarbs} g`
                 document.getElementById('total-fats').innerHTML = `Amount of Fats: ${totalFats} g`
                 document.getElementById('total-protein').innerHTML = `Amount of Protein ${totalProtein} g`
